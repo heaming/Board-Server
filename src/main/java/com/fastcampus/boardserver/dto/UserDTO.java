@@ -18,7 +18,7 @@ public class UserDTO {
     private int id;
     private String userId;
     private String password;
-    private String nickName;
+    private String nickname;
     private boolean isAdmin;
     private Date createTime;
     private boolean isWithDraw;

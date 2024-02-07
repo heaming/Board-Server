@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fastcampus.boardserver.mapper.UserProfileMapper">
+    <select id="getUserProfile" resultType="com.fastcampus.boardserver.dto.UserDTO">
+        SELECT ID
+            , USER_Id
+            , PASSWORD
+            , NICKNAME
+            , IS_ADMIN
+            , CREATE_TIME
+            , IS_WITH_DRAW
+            , STATUS
+            , UPDATE_TIME
+        FROM USER
+        WHERE USER_ID = #{id}
+    </select>
+    
+    <insert id="insertUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
+        INSERT INTO USER (
+                          USER_ID
+                          , PASSWORD
+                          , NICKNAME
+                          , IS_WITH_DRAW
+                          , STATUS
+                          , IS_ADMIN
+        )
+        VALUES (
+              #{userId}
+            , #{password}
+            , #{nickname}
+            , #{isWithDraw}
+            , #{status}
+            , #{isAdmin}          
+        )
+    </insert>
+
+    <delete id="deleteUserProfile">
+        DELETE FROM USER
+        WHERE USER_ID = #{userId}
+    </delete>
+    
+    <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
+        UPDATE USER
+        SET PASSWORD = #{password}
+          , NICKNAME = #{nickname}
+          , IS_WITH_DRAW = #{isWithDraw}
+          , STATUS = #{status}
+        WHERE ID = #{userId}
+    </update>
+
+    <select id="getUserByIdAndPassword" resultType="com.fastcampus.boardserver.dto.UserDTO">
+        SELECT ID
+             , USER_Id
+             , PASSWORD
+             , NICKNAME
+             , IS_ADMIN
+             , CREATE_TIME
+             , IS_WITH_DRAW
+             , STATUS
+             , UPDATE_TIME
+        FROM USER
+        WHERE USER_ID = #{id}
+        AND PASSWORD = #{password}
+        AND STATUS != 'DELETE'
+    </select>
+
+    <select id="isDuplicatedId" resultType="INTEGER">
+        SELECT COUNT(ID)
+        FROM USER
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <update id="updatePassword" parameterType="com.fastcampus.boardserver.dto.UserDTO">
+        UPDATE USER
+        SET PASSWORD = #{password}
+        WHERE USER_ID = #{userId}
+    </update>
+
+</mapper>
