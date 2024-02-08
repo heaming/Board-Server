@@ -12,7 +12,7 @@
             , STATUS
             , UPDATE_TIME
         FROM USER
-        WHERE USER_ID = #{id}
+        WHERE USER_ID = #{userId}
     </select>
     
     <insert id="insertUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
@@ -45,7 +45,7 @@
           , NICKNAME = #{nickname}
           , IS_WITH_DRAW = #{isWithDraw}
           , STATUS = #{status}
-        WHERE ID = #{userId}
+        WHERE ID = #{id}
     </update>
 
     <select id="getUserByIdAndPassword" resultType="com.fastcampus.boardserver.dto.UserDTO">
@@ -59,12 +59,12 @@
              , STATUS
              , UPDATE_TIME
         FROM USER
-        WHERE USER_ID = #{id}
+        WHERE USER_ID = #{userId}
         AND PASSWORD = #{password}
         AND STATUS != 'DELETE'
     </select>
 
-    <select id="isDuplicatedId" resultType="INTEGER">
+    <select id="isDuplicatedId" resultType="boolean">
         SELECT COUNT(ID)
         FROM USER
         WHERE USER_ID = #{userId}

@@ -8,21 +8,15 @@ import java.util.Date;
 
 @Mapper
 public interface UserProfileMapper {
-    public UserDTO getUserProfile(@Param("id") String id);
+    public UserDTO getUserProfile(String userId);
 
-    int insertUserProfile(@Param("id") String userId,
-                          @Param("password") String password,
-                          String nickname,
-                          boolean isAdmin,
-                          boolean isWithDraw,
-                          UserDTO.Status status
-    );
+    int insertUserProfile(UserDTO userDTO);
 
-    int deleteUserProfile(@Param("id") String userId);
+    int deleteUserProfile(String userId);
 
-    public UserDTO getUserByIdAndPassword(@Param("id") String userId,String password);
+    public UserDTO getUserByIdAndPassword(String userId,String password);
 
-    int isDuplicatedId(@Param("id") String userId);
+    boolean isDuplicatedId(String userId);
 
     public int updatePassword(UserDTO user);
 
