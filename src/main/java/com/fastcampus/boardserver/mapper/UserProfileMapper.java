@@ -10,13 +10,13 @@ import java.util.Date;
 public interface UserProfileMapper {
     public UserDTO getUserProfile(String userId);
 
-    int insertUserProfile(UserDTO userDTO);
+    public int insertUserProfile(UserDTO userDTO);
 
-    int deleteUserProfile(String userId);
+    public int deleteUserProfile(String userId);
 
-    public UserDTO getUserByIdAndPassword(String userId,String password);
+    public UserDTO getUserByIdAndPassword(String userId, String password);
 
-    boolean isDuplicatedId(String userId);
+    public int isDuplicatedId(String userId);
 
     public int updatePassword(UserDTO user);
 

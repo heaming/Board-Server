@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateIdException("중복된 ID입니다.");
         }
 
-        userProfile.setCreateTime(new Date());
         userProfile.setPassword(encryptSHA256(userProfile.getPassword()));
 
         int insertCount = userProfileMapper.insertUserProfile(userProfile);
@@ -40,31 +39,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO login(String id, String password) {
+    public UserDTO login(String userId, String password) {
         String cryptPassword = encryptSHA256(password);
-        UserDTO userDTO = userProfileMapper.getUserByIdAndPassword(id, cryptPassword);
+        UserDTO userDTO = userProfileMapper.getUserByIdAndPassword(userId, cryptPassword);
 
         return userDTO;
     }
 
     @Override
     public boolean isDuplicatedId(String userId) {
-        return userProfileMapper.isDuplicatedId(userId);
+        if(userProfileMapper.isDuplicatedId(userId) > 0) return true;
+
+        return false;
     }
 
     @Override
     public UserDTO getUserInfo(String userId) {
-        return null;
+        return userProfileMapper.getUserProfile(userId);
     }
 
     @Override
     public void updatePassword(String userId, String beforePassword, String afterPassword) {
         String cryptPassword = encryptSHA256(beforePassword);
-        UserDTO userDTO = userProfileMapper.getUserByIdAndPassword(userId, beforePassword);
+        log.info("userID :: {}", userId);
+        UserDTO userDTO = userProfileMapper.getUserByIdAndPassword(userId, cryptPassword);
+
+        log.info("get userDTO :: {}", userDTO);
 
         if(userDTO != null) {
             userDTO.setPassword(encryptSHA256(afterPassword));
+            log.info(encryptSHA256(afterPassword));
+            log.info("after userDTO :: {}", userDTO);
             int insertCount = userProfileMapper.updatePassword(userDTO);
+            log.info("changed password : {}", userProfileMapper.getUserByIdAndPassword(userId, encryptSHA256(afterPassword)));
         } else {
             log.error("updatePassword Error! : {}", userDTO);
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
@@ -80,6 +87,22 @@ public class UserServiceImpl implements UserService {
             int deleteCount = userProfileMapper.deleteUserProfile(userId);
         } else {
             log.error("deleteId Error! : {}", userDTO);
+            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+        }
+
+    }
+
+    @Override
+    public void updateUserProfile(String userId, UserDTO userProfile) {
+        String cryptPassword = encryptSHA256(userProfile.getPassword());
+        UserDTO userDTO = userProfileMapper.getUserByIdAndPassword(userId, cryptPassword);
+        log.error("userDTO :: {}", userProfile);
+
+        if(userDTO != null) {
+            userDTO.setNickname(userProfile.getNickname());
+            int updateCount = userProfileMapper.updateUserProfile(userDTO);
+        } else {
+            log.error("updateUserProfile Error! : {}", userDTO);
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 

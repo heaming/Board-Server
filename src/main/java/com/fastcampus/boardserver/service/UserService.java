@@ -12,7 +12,9 @@ public interface UserService {
 
     UserDTO getUserInfo(String userId);
 
-    void updatePassword(String Id, String beforePassword, String afterPassword);
+    void updatePassword(String id, String beforePassword, String afterPassword);
 
     void deleteId(String id, String password);
+
+    void updateUserProfile(String userId, UserDTO userProfile);
 }

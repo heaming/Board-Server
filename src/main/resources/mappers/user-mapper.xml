@@ -3,7 +3,7 @@
 <mapper namespace="com.fastcampus.boardserver.mapper.UserProfileMapper">
     <select id="getUserProfile" resultType="com.fastcampus.boardserver.dto.UserDTO">
         SELECT ID
-            , USER_Id
+            , USER_ID
             , PASSWORD
             , NICKNAME
             , IS_ADMIN
@@ -15,7 +15,7 @@
         WHERE USER_ID = #{userId}
     </select>
     
-    <insert id="insertUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
+    <insert id="insertUserProfile" useGeneratedKeys="true" keyProperty="id" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         INSERT INTO USER (
                           USER_ID
                           , PASSWORD
@@ -23,14 +23,16 @@
                           , IS_WITH_DRAW
                           , STATUS
                           , IS_ADMIN
+                          , CREATE_TIME
         )
         VALUES (
               #{userId}
             , #{password}
             , #{nickname}
-            , #{isWithDraw}
+            , FALSE
             , #{status}
-            , #{isAdmin}          
+            , #{isAdmin}
+            , NOW()
         )
     </insert>
 
@@ -41,16 +43,16 @@
     
     <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         UPDATE USER
-        SET PASSWORD = #{password}
-          , NICKNAME = #{nickname}
+        SET NICKNAME = #{nickname}
           , IS_WITH_DRAW = #{isWithDraw}
           , STATUS = #{status}
+          , UPDATE_TIME = NOW()
         WHERE ID = #{id}
     </update>
 
     <select id="getUserByIdAndPassword" resultType="com.fastcampus.boardserver.dto.UserDTO">
         SELECT ID
-             , USER_Id
+             , USER_ID
              , PASSWORD
              , NICKNAME
              , IS_ADMIN
@@ -64,7 +66,7 @@
         AND STATUS != 'DELETE'
     </select>
 
-    <select id="isDuplicatedId" resultType="boolean">
+    <select id="isDuplicatedId" resultType="java.lang.Integer">
         SELECT COUNT(ID)
         FROM USER
         WHERE USER_ID = #{userId}
@@ -73,7 +75,8 @@
     <update id="updatePassword" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         UPDATE USER
         SET PASSWORD = #{password}
-        WHERE USER_ID = #{userId}
+          , UPDATE_TIME = NOW()
+        WHERE ID = #{id}
     </update>
 
 </mapper>

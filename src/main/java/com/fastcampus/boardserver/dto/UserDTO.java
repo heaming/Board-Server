@@ -11,9 +11,6 @@ import java.util.Date;
 @ToString
 public class UserDTO {
 
-    public static boolean hasNullDataBeforeRegister(UserDTO userDTO) {
-        return userDTO.getUserId() == null || userDTO.getPassword() == null || userDTO.getNickname() == null;
-    }
 
     public enum Status {
         DEFAULT, ADMIN, DELETED
@@ -28,4 +25,8 @@ public class UserDTO {
     private boolean isWithDraw;
     private Status status;
     private Date updateTime;
+
+    public static boolean hasNullDataBeforeRegister(UserDTO userDTO) {
+        return userDTO.getUserId() == null || userDTO.getPassword() == null || userDTO.getNickname() == null;
+    }
 }
