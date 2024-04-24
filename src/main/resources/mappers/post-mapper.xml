@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fastcampus.boardserver.mapper.PostMapper">
+    <select id="selectMyPosts" resultType="com.fastcampus.boardserver.dto.PostDTO">
+        SELECT ID
+            , NAME
+            , IS_ADMIN
+            , CONTENTS
+            , CREATE_TIME
+            , VIEWS
+            , CATEGORY_iD
+            , USER_ID
+            , FILE_ID
+            , UPDATE_TIME
+        FROM POST
+        WHERE 1=1
+        AND USER_ID = #{userId}
+    </select>
+
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id" parameterType="com.fastcampus.boardserver.dto.PostDTO">
+        INSERT INTO POST (
+              NAME
+            , IS_ADMIN
+            , CONTENTS
+            , CREATE_TIME
+            , VIEWS
+            , CATEGORY_ID
+            , USER_ID
+            , FILE_ID
+        )
+        VALUES (
+            #{name}
+            , #{isAdmin}
+            , #{contents}
+            , NOW()
+            , #{views}
+            , #{fileId}
+        )
+    </insert>
+
+    <update id="updatePost" parameterType="com.fastcampus.boardserver.dto.PostDTO">
+        UPDATE POST
+        SET NAME = #{name}
+          , CONTENTS = #{contents}
+          , VIEWS = #{views}
+          , CATEGORY_ID = #{categoryId}
+          , USER_ID = #{userId}
+          , FILE_ID = #{fileId}
+          , UPDATE_TIME = NOW()
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deletePost">
+        DELETE FROM POST
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

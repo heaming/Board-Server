@@ -8,7 +8,7 @@
             , NICKNAME
             , IS_ADMIN
             , CREATE_TIME
-            , IS_WITH_DRAW
+            , IS_WITHDRAW
             , STATUS
             , UPDATE_TIME
         FROM USER
@@ -20,7 +20,7 @@
                           USER_ID
                           , PASSWORD
                           , NICKNAME
-                          , IS_WITH_DRAW
+                          , IS_WITHDRAW
                           , STATUS
                           , IS_ADMIN
                           , CREATE_TIME
@@ -44,7 +44,7 @@
     <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         UPDATE USER
         SET NICKNAME = #{nickname}
-          , IS_WITH_DRAW = #{isWithDraw}
+          , IS_WITHDRAW = #{isWithDraw}
           , STATUS = #{status}
           , UPDATE_TIME = NOW()
         WHERE ID = #{id}
@@ -57,7 +57,7 @@
              , NICKNAME
              , IS_ADMIN
              , CREATE_TIME
-             , IS_WITH_DRAW
+             , IS_WITHDRAW
              , STATUS
              , UPDATE_TIME
         FROM USER

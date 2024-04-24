@@ -14,7 +14,7 @@ import java.util.List;
 @Log4j2
 public class CategoryController {
 
-    public CategoryService categoryService;
+    private CategoryService categoryService;
 
     // Request Example - inner class
     @Getter
