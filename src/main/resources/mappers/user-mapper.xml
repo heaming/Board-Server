@@ -3,14 +3,14 @@
 <mapper namespace="com.fastcampus.boardserver.mapper.UserProfileMapper">
     <select id="getUserProfile" resultType="com.fastcampus.boardserver.dto.UserDTO">
         SELECT ID
-            , USER_ID
+            , user_id AS userId
             , PASSWORD
             , NICKNAME
-            , IS_ADMIN
-            , CREATE_TIME
-            , IS_WITHDRAW
+            , IS_ADMIN AS isAdmin
+            , create_time
+            , is_withdraw
             , STATUS
-            , UPDATE_TIME
+            , update_time
         FROM USER
         WHERE USER_ID = #{userId}
     </select>

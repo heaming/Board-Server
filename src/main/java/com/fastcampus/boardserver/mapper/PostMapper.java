@@ -12,7 +12,7 @@ public interface PostMapper {
 
     public List<PostDTO> selectMyPosts(int userId);
 
-    public void updatePosts(PostDTO postDTO);
+    public void updatePost(PostDTO postDTO);
 
     public void deletePost(int postId);
 }

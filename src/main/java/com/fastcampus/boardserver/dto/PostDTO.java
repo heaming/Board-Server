@@ -16,12 +16,13 @@ import java.util.Date;
 public class PostDTO {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private int id;
 
     private String name;
 
+    @Column(columnDefinition = "TINYINT(1)")
     private int isAdmin;
 
     private String contents;

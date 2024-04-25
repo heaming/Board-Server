@@ -88,7 +88,7 @@ public class PostController {
                 .contents(request.getContents())
                 .views(request.getViews())
                 .categoryId(request.getCategoryId())
-                .userId(request.getUserId())
+                .userId(userDTO.getId())
                 .fileId(request.getFileId())
                 .updateTime(new Date())
                 .build();

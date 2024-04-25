@@ -52,9 +52,11 @@ public class CategoryController {
                                @PathVariable(name="categoryId") int categoryId,
                                @RequestBody CategoryRequest categoryRequest) {
 
-        CategoryDTO categoryDTO = new CategoryDTO( categoryId,
-                                                   categoryRequest.getName(),
-                                                    CategoryDTO.SortStatus.NEWEST, 10, 10);
+        CategoryDTO categoryDTO = new CategoryDTO(categoryId,
+                categoryRequest.getName(), CategoryDTO.SortStatus.NEWEST, 10, 1);
+        categoryDTO.setId(categoryRequest.getId());
+        categoryDTO.setName(categoryRequest.getName());
+        categoryDTO.setPagingStartOffset(10);
         categoryService.updateCategory(categoryDTO);
     }
 

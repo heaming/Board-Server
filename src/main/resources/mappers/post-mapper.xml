@@ -4,14 +4,14 @@
     <select id="selectMyPosts" resultType="com.fastcampus.boardserver.dto.PostDTO">
         SELECT ID
             , NAME
-            , IS_ADMIN
+            , IS_ADMIN AS isAdmin
             , CONTENTS
-            , CREATE_TIME
+            , CREATE_TIME as createTime
             , VIEWS
-            , CATEGORY_iD
-            , USER_ID
-            , FILE_ID
-            , UPDATE_TIME
+            , CATEGORY_ID as categoryId
+            , USER_ID as userId
+            , FILE_ID as fileId
+            , UPDATE_TIME as updateTime
         FROM POST
         WHERE 1=1
         AND USER_ID = #{userId}
@@ -34,6 +34,8 @@
             , #{contents}
             , NOW()
             , #{views}
+            , #{fileId}
+            , #{userId}
             , #{fileId}
         )
     </insert>

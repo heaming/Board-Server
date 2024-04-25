@@ -29,6 +29,8 @@ dependencies {
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '3.1.2'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
 	runtimeOnly("com.mysql:mysql-connector-j")
 
 	// https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api

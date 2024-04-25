@@ -19,12 +19,14 @@ public class CategoryDTO {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private int id;
 
     @Column(name="NAME")
     private String name;
+//    private Date createTime;
+//    private Date updateTime;
     private SortStatus sortStatus;
     private int searchCount;
     private int pagingStartOffset;
