@@ -3,14 +3,14 @@
 <mapper namespace="com.fastcampus.boardserver.mapper.UserProfileMapper">
     <select id="getUserProfile" resultType="com.fastcampus.boardserver.dto.UserDTO">
         SELECT ID
-            , USER_ID
+            , user_id AS userId
             , PASSWORD
             , NICKNAME
-            , IS_ADMIN
-            , CREATE_TIME
-            , IS_WITH_DRAW
+            , IS_ADMIN AS isAdmin
+            , create_time
+            , is_withdraw
             , STATUS
-            , UPDATE_TIME
+            , update_time
         FROM USER
         WHERE USER_ID = #{userId}
     </select>
@@ -20,7 +20,7 @@
                           USER_ID
                           , PASSWORD
                           , NICKNAME
-                          , IS_WITH_DRAW
+                          , IS_WITHDRAW
                           , STATUS
                           , IS_ADMIN
                           , CREATE_TIME
@@ -44,7 +44,7 @@
     <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         UPDATE USER
         SET NICKNAME = #{nickname}
-          , IS_WITH_DRAW = #{isWithDraw}
+          , IS_WITHDRAW = #{isWithDraw}
           , STATUS = #{status}
           , UPDATE_TIME = NOW()
         WHERE ID = #{id}
@@ -57,7 +57,7 @@
              , NICKNAME
              , IS_ADMIN
              , CREATE_TIME
-             , IS_WITH_DRAW
+             , IS_WITHDRAW
              , STATUS
              , UPDATE_TIME
         FROM USER

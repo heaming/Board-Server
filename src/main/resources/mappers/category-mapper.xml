@@ -17,19 +17,19 @@
         INSERT INTO CATEGORY (
             ID
           , NAME
-          , CREATE_TIME
+#          , CREATE_TIME
         )
         VALUES (
             #{id}
           , #{name}
-          , NOW()
+#          , NOW()
         )
     </insert>
 
     <update id="updateCategory" parameterType="com.fastcampus.boardserver.dto.CategoryDTO">
         UPDATE CATEGORY
         SET NAME = #{name}
-        , UPDATE_TIME = NOW()
+#        , UPDATE_TIME = NOW()
         WHERE ID = #{id}
     </update>
     <delete id="deleteCategory">

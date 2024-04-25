@@ -34,7 +34,7 @@ public class LoginCheckAspect {
                 break;
             }
             case "USER" : {
-                id = SessionUtil.getLoginAdminId(session);
+                id = SessionUtil.getLoginMemberId(session);
             }
         }
         if (id == null) {
