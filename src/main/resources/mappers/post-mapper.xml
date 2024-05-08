@@ -18,7 +18,10 @@
     </select>
 
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="id" parameterType="com.fastcampus.boardserver.dto.PostDTO">
-        INSERT INTO POST (
+    <selectKey keyProperty="id" resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO POST (
               NAME
             , IS_ADMIN
             , CONTENTS

@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table(name="POST")
+
 @Getter
 @Setter
 @ToString
@@ -38,4 +38,6 @@ public class PostDTO {
     private int fileId;
 
     private Date updateTime;
+
+    private List<TagDTO> tagDTOS;
 }

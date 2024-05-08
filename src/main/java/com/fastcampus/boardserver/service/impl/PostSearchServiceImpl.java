@@ -31,4 +31,17 @@ public class PostSearchServiceImpl implements PostSearchService {
 
         return postDTOS;
     }
+
+    @Override
+    public List<PostDTO> getPostsByTagName(String tagName) {
+        List<PostDTO> postDTOS = null;
+
+        try {
+            postDTOS = mapper.selectPostsByTagName(tagName);
+        } catch (RuntimeException e) {
+            log.error("getPostsByTagName() 실패:",e.getMessage());
+        }
+
+        return postDTOS;
+    }
 }

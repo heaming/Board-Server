@@ -33,7 +33,25 @@
         <if test="sortStatus.toString() == 'CATEGORIES'">
         ORDER BY CATEGORY_ID
         </if>
+    </select>
 
+    <select id="selectPostsByTagName" resultType="com.fastcampus.boardserver.dto.request.PostSearchRequest">
+        SELECT ID
+             , NAME
+             , IS_ADMIN AS isAdmin
+             , CONTENTS
+             , CREATE_TIME as createTime
+             , VIEWS
+             , CATEGORY_ID as categoryId
+             , USER_ID as userId
+             , FILE_ID as fileId
+             , UPDATE_TIME as updateTime
+        FROM POST P
+        INNER JOIN POST_TAG PT
+        ON P.ID = PT.postId
+        INNER JOIN TAG T
+        ON PT.tagId = T.id
+        WHERE T.NAME = #{tagName}
     </select>
 
 </mapper>
