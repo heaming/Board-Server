@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +21,14 @@ public class PostSearchController {
 
     @PostMapping
     public PostSearchResponse search(@RequestBody PostSearchRequest request) {
-        List<PostDTO> postDTOs = postSearchService.getPosts(request);
-        return new PostSearchResponse(postDTOs);
+        List<PostDTO> postDTOS = postSearchService.getPosts(request);
+        return new PostSearchResponse(postDTOS);
+    }
+
+    @GetMapping
+    public PostSearchResponse searchByTagName(String tagName) {
+        List<PostDTO> postDTOS = postSearchService.getPostsByTagName(tagName);
+        return new PostSearchResponse(postDTOS);
     }
 
     // response 객체
