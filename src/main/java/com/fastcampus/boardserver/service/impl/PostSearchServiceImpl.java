@@ -34,6 +34,7 @@ public class PostSearchServiceImpl implements PostSearchService {
         return postDTOS;
     }
 
+    @Async
     @Override
     public List<PostDTO> getPostsByTagName(String tagName) {
         List<PostDTO> postDTOS = null;
